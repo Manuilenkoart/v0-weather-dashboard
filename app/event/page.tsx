@@ -54,13 +54,10 @@ export default function Page() {
                 {/* Location with Map Icon */}
                 <div className="flex gap-3">
                   <div className="flex-1 relative">
-                    <label className="absolute -top-3 left-3 text-xs text-[#ffffff] bg-[#000000] px-1">
-                      Location
-                    </label>
                     <input
                       type="text"
-                      className="w-full bg-[#272727] text-[#ffffff] px-4 py-4 rounded-lg border border-[#272727] focus:outline-none focus:border-[#6366f1] transition-colors"
-                      placeholder=""
+                      className="w-full bg-[#272727] text-[#bdbdbd] px-4 py-4 rounded-lg border border-[#272727] focus:outline-none focus:border-[#6366f1] transition-colors placeholder:text-[#bdbdbd]"
+                      placeholder="Location"
                     />
                   </div>
                   <button className="w-14 h-14 bg-[#272727] rounded-lg flex items-center justify-center hover:bg-[#1e1e1e] transition-colors">
@@ -68,14 +65,14 @@ export default function Page() {
                   </button>
                 </div>
 
-                {/* Coordinate */}
+                {/* Coordinate
                 <div>
                   <input
                     type="text"
                     placeholder="Coordinate"
                     className="w-full bg-[#272727] text-[#bdbdbd] px-4 py-4 rounded-lg border border-[#272727] focus:outline-none focus:border-[#6366f1] transition-colors placeholder:text-[#bdbdbd]"
                   />
-                </div>
+                </div> */}
 
                 {/* Name of event */}
                 <div>

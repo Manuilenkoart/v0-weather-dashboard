@@ -1,26 +1,20 @@
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
-  Cloud,
+  Calendar,
+  MapPin,
+  Target,
+  Settings,
+  ChevronDown,
+  Info,
   CloudRain,
   Thermometer,
   Wind,
   Eye,
-  MapPin,
-  Settings,
-  Search,
-  Calendar,
-  CheckCircle,
-  Home,
-  Bookmark,
-  BarChart3,
-  Grid3X3,
 } from "lucide-react";
-import { Header } from "./ui/header";
 
-export function WeatherDashboard() {
+import { Header } from "./ui/header";
+import Asidemenu from "./ui/asideMenu";
+
+export default function WeatherDashboard() {
   const conditions = [
     {
       name: "Hot",
@@ -79,270 +73,478 @@ export function WeatherDashboard() {
       data: "50 (AQI)",
     },
   ];
+
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-[#000000] text-[#ffffff] ">
+      {/* Sidebar */}
       <Header />
 
-      <div className="flex">
-        {/* Sidebar */}
-        <aside className="w-16 bg-sidebar border-r border-sidebar-border p-4 rounded-xl">
-          <nav className="flex flex-col gap-4">
-            <Button
-              variant="ghost"
-              size="icon"
-              className="text-sidebar-foreground hover:bg-sidebar-accent"
-            >
-              <Grid3X3 className="h-5 w-5" />
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="text-sidebar-foreground hover:bg-sidebar-accent"
-            >
-              <BarChart3 className="h-5 w-5" />
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="text-sidebar-foreground hover:bg-sidebar-accent"
-            >
-              <Bookmark className="h-5 w-5" />
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="text-sidebar-foreground hover:bg-sidebar-accent"
-            >
-              <Calendar className="h-5 w-5" />
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="text-sidebar-foreground hover:bg-sidebar-accent"
-            >
-              <Home className="h-5 w-5" />
-            </Button>
-          </nav>
-        </aside>
+      {/* Main Content */}
+      <main className="flex px-8">
+        <Asidemenu />
 
-        {/* Main Content */}
-        <main className="flex-1 p-6">
-          {/* Greeting */}
-          <div className="mb-6">
-            <h2 className="text-2xl font-medium text-balance">
-              Hi, Oleno – here's the risk outlook for your events.
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {/* Main Event Card */}
-            <div className="lg:col-span-1">
-              <Card className="p-6 bg-card border-border">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <MapPin className="h-4 w-4" />
-                    <span>Warsaw, Poland</span>
-                    <span>52.2297, 21.0122</span>
-                  </div>
-                  <Button variant="ghost" size="icon">
-                    <Settings className="h-4 w-4" />
-                  </Button>
+        {/* Content Area */}
+        <div className="flex-1 px-12 py-6">
+          {/* Main Grid */}
+          <div className="grid grid-cols-2 gap-6">
+            {/* Event Card */}
+            <div className="bg-[#1e1e1e] rounded-3xl p-8">
+              <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center gap-4 text-[#d8d8d8]">
+                  <Calendar className="w-5 h-5" />
+                  <span>Aug 28, 2026</span>
+                  <span className="ml-4">3:00 PM</span>
                 </div>
+                <button className="text-[#979797] hover:text-[#ffffff]">
+                  <Settings className="w-5 h-5" />
+                </button>
+              </div>
 
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h3 className="text-2xl font-semibold mb-1">
-                      Music Festival
-                    </h3>
-                    <div className="text-sm text-muted-foreground mb-2">
-                      04 Aug, 2026
-                    </div>
-                    <div className="text-sm text-muted-foreground mb-4">
-                      3:00 PM
-                    </div>
+              <div className="flex items-start justify-between">
+                <div className="flex-1">
+                  <h2 className="text-5xl font-bold mb-6">Music Festival</h2>
 
-                    <div className="flex items-center gap-2 text-success">
-                      <CheckCircle className="h-4 w-4" />
-                      <span className="text-sm">
-                        Looks good, Enjoy your event
-                      </span>
+                  <div className="space-y-2 text-[#d8d8d8]">
+                    <div className="flex items-center gap-2">
+                      <MapPin className="w-5 h-5" />
+                      <span>Warsaw, Poland</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Target className="w-5 h-5" />
+                      <span>52.2297, 21.0122</span>
                     </div>
                   </div>
 
-                  <div className="text-center">
-                    <div className="relative w-32 h-32 mb-2">
-                      <svg
-                        className="w-32 h-32 transform -rotate-90"
-                        viewBox="0 0 120 120"
-                      >
-                        <circle
-                          cx="60"
-                          cy="60"
-                          r="50"
-                          stroke="currentColor"
-                          strokeWidth="8"
-                          fill="none"
-                          className="text-muted"
-                        />
-                        <circle
-                          cx="60"
-                          cy="60"
-                          r="50"
-                          stroke="currentColor"
-                          strokeWidth="8"
-                          fill="none"
-                          strokeDasharray={`${60 * 3.14159} ${100 * 3.14159}`}
-                          className="text-primary"
-                        />
-                      </svg>
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <span className="text-4xl font-bold">60</span>
-                      </div>
-                    </div>
-                    <div className="text-sm text-muted-foreground">100</div>
+                  <div className="mt-8 flex items-center gap-2 text-[#1ad66f]">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                      <path
+                        d="M16 6L8 14L4 10"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                    <span className="font-medium">
+                      Looks good, Enjoy your event
+                    </span>
                   </div>
                 </div>
 
-                {/* <div className="flex justify-end gap-2 mt-6">
-                  <Button variant="outline">Edit Event</Button>
-                  <Button>Save Event</Button>
-                </div> */}
-              </Card>
+                <div className="flex flex-col items-center">
+                  <div className="relative w-40 h-40">
+                    <svg
+                      className="w-full h-full -rotate-90"
+                      viewBox="0 0 160 160"
+                    >
+                      <circle
+                        cx="80"
+                        cy="80"
+                        r="70"
+                        fill="none"
+                        stroke="#272727"
+                        strokeWidth="12"
+                      />
+                      <circle
+                        cx="80"
+                        cy="80"
+                        r="70"
+                        fill="none"
+                        stroke="url(#gradient)"
+                        strokeWidth="12"
+                        strokeDasharray="439.8"
+                        strokeDashoffset="175.92"
+                        strokeLinecap="round"
+                      />
+                      <defs>
+                        <linearGradient
+                          id="gradient"
+                          x1="0%"
+                          y1="0%"
+                          x2="100%"
+                          y2="100%"
+                        >
+                          <stop offset="0%" stopColor="#7c7cf5" />
+                          <stop offset="100%" stopColor="#9b7cf5" />
+                        </linearGradient>
+                      </defs>
+                    </svg>
+                    <div className="absolute inset-0 flex flex-col items-center justify-center">
+                      <span className="text-5xl font-bold">60</span>
+                      <span className="text-sm text-[#979797]">/100</span>
+                    </div>
+                  </div>
+                  <span className="mt-3 text-sm text-[#d8d8d8]">
+                    Comfort Index
+                  </span>
+                </div>
+              </div>
             </div>
 
-            {/* Conditions Card */}
-            <Card className="lg:col-span-1 p-6 bg-card border-border">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="font-semibold">Conditions</h3>
-                <Button variant="ghost" size="icon">
-                  <Settings className="h-4 w-4" />
-                </Button>
+            {/* Event History */}
+            <div className="bg-[#1e1e1e] rounded-3xl p-8">
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-xl font-semibold">Event History</h3>
+                <Info className="w-5 h-5 text-[#979797]" />
               </div>
 
-              <div className="flex justify-between">
-                {conditions.map(({ name, icon, risk }) => (
-                  <div key={name} className="flex items-center justify-between">
-                    <div className="flex flex-col items-center gap-3">
-                      <div>
-                        <div className="font-medium">Very {name}</div>
-                      </div>
+              <div className="grid grid-cols-4 gap-4">
+                {/* Very Hot */}
+                <div className="bg-[#151515] rounded-2xl p-4 flex flex-col items-center">
+                  <span className="text-sm text-[#d8d8d8] mb-4">Very Hot</span>
+                  <svg
+                    width="48"
+                    height="48"
+                    viewBox="0 0 48 48"
+                    fill="none"
+                    className="mb-4"
+                  >
+                    <rect
+                      x="18"
+                      y="8"
+                      width="6"
+                      height="24"
+                      rx="3"
+                      fill="#1ad66f"
+                    />
+                    <circle cx="21" cy="34" r="6" fill="#1ad66f" />
+                    <path
+                      d="M30 12L34 8M30 16L34 12M30 20L34 16"
+                      stroke="#1ad66f"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                    />
+                  </svg>
+                  <span className="text-sm text-[#d8d8d8]">Risk: 10%</span>
+                </div>
 
-                      <div className="p-2 rounded-lg bg-warning/20">{icon}</div>
+                {/* Very Wet */}
+                <div className="bg-[#151515] rounded-2xl p-4 flex flex-col items-center">
+                  <span className="text-sm text-[#d8d8d8] mb-4">Very Wet</span>
+                  <svg
+                    width="48"
+                    height="48"
+                    viewBox="0 0 48 48"
+                    fill="none"
+                    className="mb-4"
+                  >
+                    <circle cx="18" cy="20" r="4" fill="#ff8c42" />
+                    <circle cx="30" cy="20" r="4" fill="#ff8c42" />
+                    <circle cx="24" cy="28" r="4" fill="#ff8c42" />
+                  </svg>
+                  <span className="text-sm text-[#d8d8d8]">Risk: 70%</span>
+                </div>
 
-                      <div className="text-sm text-muted-foreground">
-                        Risk: {risk}%
-                      </div>
-                    </div>
-                  </div>
-                ))}
+                {/* Very Cold */}
+                <div className="bg-[#151515] rounded-2xl p-4 flex flex-col items-center">
+                  <span className="text-sm text-[#d8d8d8] mb-4">Very Cold</span>
+                  <svg
+                    width="48"
+                    height="48"
+                    viewBox="0 0 48 48"
+                    fill="none"
+                    className="mb-4"
+                  >
+                    <rect
+                      x="18"
+                      y="8"
+                      width="6"
+                      height="24"
+                      rx="3"
+                      fill="#1ad66f"
+                    />
+                    <circle cx="21" cy="34" r="6" fill="#1ad66f" />
+                  </svg>
+                  <span className="text-sm text-[#d8d8d8]">Risk: 10%</span>
+                </div>
+
+                {/* Very Windy */}
+                <div className="bg-[#151515] rounded-2xl p-4 flex flex-col items-center">
+                  <span className="text-sm text-[#d8d8d8] mb-4">
+                    Very Windy
+                  </span>
+                  <svg
+                    width="48"
+                    height="48"
+                    viewBox="0 0 48 48"
+                    fill="none"
+                    className="mb-4"
+                  >
+                    <path
+                      d="M8 16H28C30 16 32 18 32 20C32 22 30 24 28 24"
+                      stroke="#ffd93d"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                    />
+                    <path
+                      d="M8 24H32C34 24 36 26 36 28C36 30 34 32 32 32"
+                      stroke="#ffd93d"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                    />
+                    <path
+                      d="M8 32H24"
+                      stroke="#ffd93d"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                    />
+                  </svg>
+                  <span className="text-sm text-[#d8d8d8]">Risk: 40%</span>
+                </div>
               </div>
-            </Card>
-          </div>
+            </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
             {/* Alternative Dates */}
-            <Card className="p-6 bg-card border-border">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="font-semibold">Alternative dates</h3>
-                <Button
-                  variant="ghost"
-                  className="text-sm text-muted-foreground"
-                >
-                  See All
-                </Button>
+            <div className="bg-[#1e1e1e] rounded-3xl p-8">
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-xl font-semibold">Alternative dates</h3>
+                <button className="flex items-center gap-2 text-[#979797] hover:text-[#ffffff]">
+                  <span className="text-sm">See All</span>
+                  <ChevronDown className="w-4 h-4" />
+                </button>
               </div>
 
               <div className="space-y-4">
-                {alternativeDates.map(
-                  ({ dateShort, year, comfortIndex }, idx) => (
-                    <div
-                      key={idx}
-                      className="flex items-center justify-between p-4 rounded-lg bg-accent/50"
+                {/* Date 1 */}
+                <div className="flex items-center justify-between">
+                  <div>
+                    <div className="text-2xl font-semibold">Sep, 28</div>
+                    <div className="text-sm text-[#979797]">2026</div>
+                  </div>
+
+                  <div className="relative w-24 h-24">
+                    <svg
+                      className="w-full h-full -rotate-90"
+                      viewBox="0 0 96 96"
                     >
-                      <div>
-                        <div className="font-medium">{dateShort}</div>
-                        <div className="text-sm text-muted-foreground">
-                          {year}
-                        </div>
-                      </div>
-                      <div className="text-center">
-                        <div className="relative w-12 h-12 mb-1">
-                          <svg
-                            className="w-12 h-12 transform -rotate-90"
-                            viewBox="0 0 48 48"
-                          >
-                            <circle
-                              cx="24"
-                              cy="24"
-                              r="18"
-                              stroke="currentColor"
-                              strokeWidth="4"
-                              fill="none"
-                              className="text-muted"
-                            />
-                            <circle
-                              cx="24"
-                              cy="24"
-                              r="18"
-                              stroke="currentColor"
-                              strokeWidth="4"
-                              fill="none"
-                              strokeDasharray={`${70 * 1.13} ${100 * 1.13}`}
-                              className="text-primary"
-                            />
-                          </svg>
-                          <div className="absolute inset-0 flex items-center justify-center">
-                            <span className="text-sm font-bold">
-                              {comfortIndex}
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="text-right">
-                        <div className="text-sm text-muted-foreground">
-                          Comfort Index
-                        </div>
-                        <div className="font-semibold">{comfortIndex}/100</div>
-                      </div>
-                    </div>
-                  )
-                )}
-              </div>
-            </Card>
-
-            {/* Metrics */}
-            <Card className="p-6 bg-card border-border">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="font-semibold">Metrics</h3>
-                <Button
-                  variant="ghost"
-                  className="text-sm text-muted-foreground"
-                >
-                  See All
-                </Button>
-              </div>
-
-              <div className="flex justify-between">
-                {metrics.map(({ name, icon, data }) => (
-                  <div key={name} className="flex items-center justify-between">
-                    <div className="flex flex-col items-center gap-3">
-                      <div>
-                        <div className="font-medium">{name}</div>
-                      </div>
-
-                      <div className="p-2 rounded-lg bg-warning/20">{icon}</div>
-
-                      <div className="text-sm text-muted-foreground">
-                        {data}
-                      </div>
+                      <circle
+                        cx="48"
+                        cy="48"
+                        r="42"
+                        fill="none"
+                        stroke="#272727"
+                        strokeWidth="8"
+                      />
+                      <circle
+                        cx="48"
+                        cy="48"
+                        r="42"
+                        fill="none"
+                        stroke="url(#gradient2)"
+                        strokeWidth="8"
+                        strokeDasharray="263.89"
+                        strokeDashoffset="79.17"
+                        strokeLinecap="round"
+                      />
+                      <defs>
+                        <linearGradient
+                          id="gradient2"
+                          x1="0%"
+                          y1="0%"
+                          x2="100%"
+                          y2="100%"
+                        >
+                          <stop offset="0%" stopColor="#7c7cf5" />
+                          <stop offset="100%" stopColor="#9b7cf5" />
+                        </linearGradient>
+                      </defs>
+                    </svg>
+                    <div className="absolute inset-0 flex flex-col items-center justify-center">
+                      <span className="text-2xl font-bold">70</span>
+                      <span className="text-xs text-[#979797]">0 100</span>
                     </div>
                   </div>
-                ))}
+
+                  <div className="text-right">
+                    <div className="text-xs text-[#979797] mb-1">
+                      Comfort index
+                    </div>
+                    <div className="text-2xl font-semibold">
+                      70<span className="text-[#979797]">/100</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Date 2 */}
+                <div className="flex items-center justify-between">
+                  <div>
+                    <div className="text-2xl font-semibold">Sep, 29</div>
+                    <div className="text-sm text-[#979797]">2026</div>
+                  </div>
+
+                  <div className="relative w-24 h-24">
+                    <svg
+                      className="w-full h-full -rotate-90"
+                      viewBox="0 0 96 96"
+                    >
+                      <circle
+                        cx="48"
+                        cy="48"
+                        r="42"
+                        fill="none"
+                        stroke="#272727"
+                        strokeWidth="8"
+                      />
+                      <circle
+                        cx="48"
+                        cy="48"
+                        r="42"
+                        fill="none"
+                        stroke="url(#gradient3)"
+                        strokeWidth="8"
+                        strokeDasharray="263.89"
+                        strokeDashoffset="26.39"
+                        strokeLinecap="round"
+                      />
+                      <defs>
+                        <linearGradient
+                          id="gradient3"
+                          x1="0%"
+                          y1="0%"
+                          x2="100%"
+                          y2="100%"
+                        >
+                          <stop offset="0%" stopColor="#7c7cf5" />
+                          <stop offset="100%" stopColor="#9b7cf5" />
+                        </linearGradient>
+                      </defs>
+                    </svg>
+                    <div className="absolute inset-0 flex flex-col items-center justify-center">
+                      <span className="text-2xl font-bold">90</span>
+                      <span className="text-xs text-[#979797]">0 100</span>
+                    </div>
+                  </div>
+
+                  <div className="text-right">
+                    <div className="text-xs text-[#979797] mb-1">
+                      Comfort index
+                    </div>
+                    <div className="text-2xl font-semibold">
+                      90<span className="text-[#979797]">/100</span>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </Card>
+            </div>
+
+            {/* Live Forecast */}
+            <div className="bg-[#1e1e1e] rounded-3xl p-8">
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-xl font-semibold">Live Forecast</h3>
+                <button className="flex items-center gap-2 text-[#979797] hover:text-[#ffffff]">
+                  <span className="text-sm">See All</span>
+                  <ChevronDown className="w-4 h-4" />
+                </button>
+              </div>
+
+              <div className="grid grid-cols-4 gap-4">
+                {/* Very Hot */}
+                <div className="bg-[#151515] rounded-2xl p-4 flex flex-col items-center">
+                  <span className="text-sm text-[#d8d8d8] mb-4">Very Hot</span>
+                  <svg
+                    width="48"
+                    height="48"
+                    viewBox="0 0 48 48"
+                    fill="none"
+                    className="mb-4"
+                  >
+                    <rect
+                      x="18"
+                      y="8"
+                      width="6"
+                      height="24"
+                      rx="3"
+                      fill="#ff6b42"
+                    />
+                    <circle cx="21" cy="34" r="6" fill="#ff6b42" />
+                    <path
+                      d="M30 12L34 8M30 16L34 12M30 20L34 16"
+                      stroke="#ff6b42"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                    />
+                  </svg>
+                  <span className="text-sm text-[#d8d8d8]">+25°C</span>
+                </div>
+
+                {/* Very Wet */}
+                <div className="bg-[#151515] rounded-2xl p-4 flex flex-col items-center">
+                  <span className="text-sm text-[#d8d8d8] mb-4">Very Wet</span>
+                  <svg
+                    width="48"
+                    height="48"
+                    viewBox="0 0 48 48"
+                    fill="none"
+                    className="mb-4"
+                  >
+                    <circle cx="18" cy="20" r="4" fill="#979797" />
+                    <circle cx="30" cy="20" r="4" fill="#979797" />
+                    <circle cx="24" cy="28" r="4" fill="#979797" />
+                  </svg>
+                  <span className="text-sm text-[#d8d8d8]">7.90 mm/day</span>
+                </div>
+
+                {/* Very Cold */}
+                <div className="bg-[#151515] rounded-2xl p-4 flex flex-col items-center">
+                  <span className="text-sm text-[#d8d8d8] mb-4">Very Cold</span>
+                  <svg
+                    width="48"
+                    height="48"
+                    viewBox="0 0 48 48"
+                    fill="none"
+                    className="mb-4"
+                  >
+                    <rect
+                      x="18"
+                      y="8"
+                      width="6"
+                      height="24"
+                      rx="3"
+                      fill="#979797"
+                    />
+                    <circle cx="21" cy="34" r="6" fill="#979797" />
+                  </svg>
+                  <span className="text-sm text-[#d8d8d8]">-25°C</span>
+                </div>
+
+                {/* Very Windy */}
+                <div className="bg-[#151515] rounded-2xl p-4 flex flex-col items-center">
+                  <span className="text-sm text-[#d8d8d8] mb-4">
+                    Very Windy
+                  </span>
+                  <svg
+                    width="48"
+                    height="48"
+                    viewBox="0 0 48 48"
+                    fill="none"
+                    className="mb-4"
+                  >
+                    <path
+                      d="M8 16H28C30 16 32 18 32 20C32 22 30 24 28 24"
+                      stroke="#979797"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                    />
+                    <path
+                      d="M8 24H32C34 24 36 26 36 28C36 30 34 32 32 32"
+                      stroke="#979797"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                    />
+                    <path
+                      d="M8 32H24"
+                      stroke="#979797"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                    />
+                  </svg>
+                  <span className="text-sm text-[#d8d8d8]">7.90 mm/s</span>
+                </div>
+              </div>
+            </div>
           </div>
-        </main>
-      </div>
+        </div>
+      </main>
     </div>
   );
 }
