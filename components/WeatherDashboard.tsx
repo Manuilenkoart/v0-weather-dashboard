@@ -18,6 +18,7 @@ import {
   BarChart3,
   Grid3X3,
 } from "lucide-react";
+import { Header } from "./ui/header";
 
 export function WeatherDashboard() {
   const conditions = [
@@ -80,33 +81,11 @@ export function WeatherDashboard() {
   ];
   return (
     <div className="min-h-screen bg-background text-foreground">
-      {/* Header */}
-      <header className="flex items-center justify-between p-4 border-b border-border">
-        <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2">
-            <Cloud className="h-6 w-6 text-primary" />
-            <h1 className="text-xl font-semibold">WeatherMaster</h1>
-          </div>
-        </div>
-
-        <div className="flex items-center gap-4">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-            <Input
-              placeholder="Search your location"
-              className="pl-10 w-80 bg-card border-border"
-            />
-          </div>
-          <Avatar>
-            <AvatarImage src="/user-avatar.jpg" />
-            <AvatarFallback>OL</AvatarFallback>
-          </Avatar>
-        </div>
-      </header>
+      <Header />
 
       <div className="flex">
         {/* Sidebar */}
-        <aside className="w-16 bg-sidebar border-r border-sidebar-border p-4">
+        <aside className="w-16 bg-sidebar border-r border-sidebar-border p-4 rounded-xl">
           <nav className="flex flex-col gap-4">
             <Button
               variant="ghost"

@@ -1,5 +1,5 @@
-import { WeatherDashboard } from "@/components/weather-dashboard"
+import HomePage from "@/components/HomePage";
 
-export default function Home() {
-  return <WeatherDashboard />
+export default function Page() {
+  return <HomePage />;
 }
