@@ -3,33 +3,64 @@
 import { useState } from "react";
 import { Check, Thermometer, Droplets, Wind } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Slider } from "@radix-ui/react-slider";
-import { Label } from "@radix-ui/react-label";
 import { useRouter } from "next/navigation";
 
-import { RadioGroup, RadioGroupItem } from "@radix-ui/react-radio-group";
-
-// import { Label } from "@/components/ui/label";
-// import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-// import { Slider } from "@/components/ui/slider";
 import { Header } from "@/components/ui/header";
+import SettingsCard from "@/components/ui/settingsCard";
 
 export default function PersonalSettings() {
-  const [hotUnit, setHotUnit] = useState("celsius");
   const [hotValue, setHotValue] = useState([42.5]);
-  const [hotInput, setHotInput] = useState("");
-
-  const [wetUnit, setWetUnit] = useState("mm");
   const [wetValue, setWetValue] = useState([0.55]);
-
-  const [coldUnit, setColdUnit] = useState("celsius");
   const [coldValue, setColdValue] = useState([-35.0]);
-
-  const [windyUnit, setWindyUnit] = useState("mc");
-  const [windyValue, setWindyValue] = useState([0.75]);
+  const [windyValue, setWindyValue] = useState([10]);
   const router = useRouter();
 
+  const cards = [
+    {
+      title: "Hot",
+      label: "Temperature",
+      unit: "°C",
+      labelValue: hotValue,
+      onValueChange: setHotValue,
+      icon: <Thermometer className="w-6 h-6 text-[#757575]" />,
+      min: 25,
+      max: 60,
+      step: 0.1,
+    },
+    {
+      title: "Wet",
+      label: "E.g.",
+      unit: "mm",
+      labelValue: wetValue,
+      onValueChange: setWetValue,
+      icon: <Droplets className="w-6 h-6 text-[#757575]" />,
+      min: 0.0,
+      max: 1.1,
+      step: 0.01,
+    },
+    {
+      title: "Cold",
+      label: "Temperature",
+      unit: "°C",
+      labelValue: coldValue,
+      onValueChange: setColdValue,
+      icon: <Thermometer className="w-6 h-6 text-[#757575]" />,
+      min: -60,
+      max: -10,
+      step: 0.1,
+    },
+    {
+      title: "Windy",
+      label: "mph",
+      unit: "m/c",
+      labelValue: windyValue,
+      onValueChange: setWindyValue,
+      icon: <Wind className="w-6 h-6 text-[#757575]" />,
+      min: 0.0,
+      max: 60,
+      step: 1,
+    },
+  ];
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Header />
@@ -73,235 +104,9 @@ export default function PersonalSettings() {
 
           {/* Weather Cards Grid */}
           <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-            {/* Very Hot Card */}
-            <div className="bg-[#1e1e1e] rounded-lg p-6">
-              <div className="flex items-center gap-3 mb-6">
-                <Thermometer className="w-6 h-6 text-[#757575]" />
-                <h3 className="text-xl font-medium">Very Hot</h3>
-              </div>
-
-              <RadioGroup
-                value={hotUnit}
-                onValueChange={setHotUnit}
-                className="flex gap-4 mb-6"
-              >
-                <div className="flex items-center gap-2">
-                  <RadioGroupItem
-                    value="fahrenheit"
-                    id="hot-f"
-                    className="border-[#757575]"
-                  />
-                  <Label htmlFor="hot-f" className="text-sm cursor-pointer">
-                    °F
-                  </Label>
-                </div>
-                <div className="flex items-center gap-2">
-                  <RadioGroupItem
-                    value="celsius"
-                    id="hot-c"
-                    className="border-[#1976d2]"
-                  />
-                  <Label htmlFor="hot-c" className="text-sm cursor-pointer">
-                    °C
-                  </Label>
-                </div>
-              </RadioGroup>
-
-              <div className="mb-4">
-                <Label className="text-sm text-[#757575] mb-2 block">
-                  Temperature
-                </Label>
-                <Input
-                  type="text"
-                  value={hotInput}
-                  onChange={(e) => setHotInput(e.target.value)}
-                  className="bg-[#151515] border-[#1976d2] text-white h-12"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Slider
-                  value={hotValue}
-                  onValueChange={setHotValue}
-                  min={25}
-                  max={60}
-                  step={0.1}
-                  // className="[&_[role=slider]]:bg-[#1976d2] [&_[role=slider]]:border-[#1976d2]"
-                />
-                <div className="flex justify-between text-xs text-[#757575]">
-                  <span>+25.0°C</span>
-                  <span>+60.0°C</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Very Wet Card */}
-            <div className="bg-[#1e1e1e] rounded-lg p-6">
-              <div className="flex items-center gap-3 mb-6">
-                <Droplets className="w-6 h-6 text-[#757575]" />
-                <h3 className="text-xl font-medium">Very Wet</h3>
-              </div>
-
-              <RadioGroup
-                value={wetUnit}
-                onValueChange={setWetUnit}
-                className="flex gap-4 mb-6"
-              >
-                <div className="flex items-center gap-2">
-                  <RadioGroupItem
-                    value="in"
-                    id="wet-in"
-                    className="border-[#757575]"
-                  />
-                  <Label htmlFor="wet-in" className="text-sm cursor-pointer">
-                    in
-                  </Label>
-                </div>
-                <div className="flex items-center gap-2">
-                  <RadioGroupItem
-                    value="mm"
-                    id="wet-mm"
-                    className="border-[#1976d2]"
-                  />
-                  <Label htmlFor="wet-mm" className="text-sm cursor-pointer">
-                    MM
-                  </Label>
-                </div>
-              </RadioGroup>
-
-              <div className="mb-4">
-                <div className="h-12 flex items-center text-[#757575]">
-                  E.g. 0.19
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <Slider
-                  value={wetValue}
-                  onValueChange={setWetValue}
-                  min={0}
-                  max={1.1}
-                  step={0.01}
-                  className="[&_[role=slider]]:bg-[#1976d2] [&_[role=slider]]:border-[#1976d2]"
-                />
-                <div className="flex justify-between text-xs text-[#757575]">
-                  <span>0.00 mm</span>
-                  <span>1.10 mm</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Very Cold Card */}
-            <div className="bg-[#1e1e1e] rounded-lg p-6">
-              <div className="flex items-center gap-3 mb-6">
-                <Thermometer className="w-6 h-6 text-[#757575]" />
-                <h3 className="text-xl font-medium">Very Cold</h3>
-              </div>
-
-              <RadioGroup
-                value={coldUnit}
-                onValueChange={setColdUnit}
-                className="flex gap-4 mb-6"
-              >
-                <div className="flex items-center gap-2">
-                  <RadioGroupItem
-                    value="fahrenheit"
-                    id="cold-f"
-                    className="border-[#757575]"
-                  />
-                  <Label htmlFor="cold-f" className="text-sm cursor-pointer">
-                    °F
-                  </Label>
-                </div>
-                <div className="flex items-center gap-2">
-                  <RadioGroupItem
-                    value="celsius"
-                    id="cold-c"
-                    className="border-[#1976d2]"
-                  />
-                  <Label htmlFor="cold-c" className="text-sm cursor-pointer">
-                    °C
-                  </Label>
-                </div>
-              </RadioGroup>
-
-              <div className="mb-4">
-                <div className="h-12 flex items-center text-[#757575]">
-                  E.g. -35.5
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <Slider
-                  value={coldValue}
-                  onValueChange={setColdValue}
-                  min={-60}
-                  max={-10}
-                  step={0.1}
-                  className="[&_[role=slider]]:bg-[#1976d2] [&_[role=slider]]:border-[#1976d2]"
-                />
-                <div className="flex justify-between text-xs text-[#757575]">
-                  <span>-10.0°C</span>
-                  <span>-60.0°C</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Very Windy Card */}
-            <div className="bg-[#1e1e1e] rounded-lg p-6">
-              <div className="flex items-center gap-3 mb-6">
-                <Wind className="w-6 h-6 text-[#757575]" />
-                <h3 className="text-xl font-medium">Very Windy</h3>
-              </div>
-
-              <RadioGroup
-                value={windyUnit}
-                onValueChange={setWindyUnit}
-                className="flex gap-4 mb-6"
-              >
-                <div className="flex items-center gap-2">
-                  <RadioGroupItem
-                    value="mph"
-                    id="windy-mph"
-                    className="border-[#757575]"
-                  />
-                  <Label htmlFor="windy-mph" className="text-sm cursor-pointer">
-                    mph
-                  </Label>
-                </div>
-                <div className="flex items-center gap-2">
-                  <RadioGroupItem
-                    value="mc"
-                    id="windy-mc"
-                    className="border-[#1976d2]"
-                  />
-                  <Label htmlFor="windy-mc" className="text-sm cursor-pointer">
-                    m/c
-                  </Label>
-                </div>
-              </RadioGroup>
-
-              <div className="mb-4">
-                <div className="h-12 flex items-center text-[#757575]">
-                  E.g. 17.0
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <Slider
-                  value={windyValue}
-                  onValueChange={setWindyValue}
-                  min={0}
-                  max={1.5}
-                  step={0.01}
-                  className="[&_[role=slider]]:bg-[#1976d2] [&_[role=slider]]:border-[#1976d2]"
-                />
-                <div className="flex justify-between text-xs text-[#757575]">
-                  <span>0.0 m/c</span>
-                  <span>1.5 m/c</span>
-                </div>
-              </div>
-            </div>
+            {cards.map((c) => (
+              <SettingsCard key={c.title} {...c} />
+            ))}
           </div>
 
           {/* Navigation Buttons */}
