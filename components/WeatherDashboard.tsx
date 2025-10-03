@@ -1,9 +1,11 @@
-import { Calendar, Target, Settings } from "lucide-react";
+"use client";
 
+import { Calendar, Target, Settings } from "lucide-react";
 import { Header } from "./ui/header";
 import Asidemenu from "./ui/asideMenu";
 import Image from "next/image";
 import DashboardCard from "./ui/dashboardCard";
+import { useEffect, useState } from "react";
 
 export default function WeatherDashboard() {
   const conditions = [
@@ -115,7 +117,23 @@ export default function WeatherDashboard() {
       data: "7.90 mm/s",
     },
   ];
+  const [form, setForm] = useState({
+    location: "",
+    event: "",
+    date: "",
+  });
+  useEffect(() => {
+    try {
+      const local = localStorage.getItem("eventForm");
 
+      if (local) {
+        const eventForm = JSON.parse(local);
+        setForm(eventForm);
+      }
+    } catch (error) {
+      console.error("Failed to save form data:", error);
+    }
+  }, []);
   return (
     <div className="min-h-screen bg-[#000000] text-[#ffffff] ">
       {/* Sidebar */}
@@ -134,7 +152,7 @@ export default function WeatherDashboard() {
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-4 text-[#d8d8d8]">
                   <Calendar className="w-5 h-5" />
-                  <span>Aug 28, 2026</span>
+                  <span>{form.date}</span>
                   {/* <span className="ml-4">3:00 PM</span> */}
                 </div>
                 <button className="text-[#979797] hover:text-[#ffffff]">
@@ -144,7 +162,7 @@ export default function WeatherDashboard() {
 
               <div className="flex items-start justify-between">
                 <div className="flex-1">
-                  <h2 className="text-5xl font-bold mb-6">Music Festival</h2>
+                  <h2 className="text-5xl font-bold mb-6">{form.event}</h2>
 
                   <div className="space-y-2 text-[#d8d8d8]">
                     {/* <div className="flex items-center gap-2">
@@ -153,7 +171,7 @@ export default function WeatherDashboard() {
                     </div> */}
                     <div className="flex items-center gap-2">
                       <Target className="w-5 h-5" />
-                      <span>52.2297, 21.0122</span>
+                      <span>{form.location}</span>
                     </div>
                   </div>
 

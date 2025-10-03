@@ -5,9 +5,27 @@ import { useRouter } from "next/navigation";
 
 import { Header } from "@/components/ui/header";
 import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
 
 export default function Page() {
   const router = useRouter();
+  const [form, setForm] = useState({
+    location: "52.2297, 21.0122",
+    event: "",
+    date: "",
+  });
+
+  useEffect(() => {
+    const saveFormData = () => {
+      try {
+        localStorage.setItem("eventForm", JSON.stringify(form));
+      } catch (error) {
+        console.error("Failed to save form data:", error);
+      }
+    };
+
+    saveFormData();
+  }, [form]);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -79,6 +97,9 @@ export default function Page() {
                   <input
                     type="text"
                     placeholder="Name of event"
+                    onChange={(e) =>
+                      setForm((prev) => ({ ...prev, event: e.target.value }))
+                    }
                     className="w-full bg-[#272727] text-[#bdbdbd] px-4 py-4 rounded-lg border border-[#272727] focus:outline-none focus:border-[#6366f1] transition-colors placeholder:text-[#bdbdbd]"
                   />
                 </div>
@@ -88,6 +109,9 @@ export default function Page() {
                   <input
                     type="text"
                     placeholder="Date"
+                    onChange={(e) =>
+                      setForm((prev) => ({ ...prev, date: e.target.value }))
+                    }
                     className="flex-1 bg-[#272727] text-[#bdbdbd] px-4 py-4 rounded-lg border border-[#272727] focus:outline-none focus:border-[#6366f1] transition-colors placeholder:text-[#bdbdbd]"
                   />
                 </div>
