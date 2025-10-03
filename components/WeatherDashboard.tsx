@@ -134,6 +134,15 @@ export default function WeatherDashboard() {
       console.error("Failed to save form data:", error);
     }
   }, []);
+
+  useEffect(() => {
+    fetch("https://weather-backend-1-w160.onrender.com/api/passport")
+      .then((d) => d.json())
+      .then((d) => {
+        console.log("d", d);
+      })
+      .catch((e) => console.error(e));
+  }, []);
   return (
     <div className="min-h-screen bg-[#000000] text-[#ffffff] ">
       {/* Sidebar */}
