@@ -1,6 +1,6 @@
 "use client";
 
-import { Calendar, Map } from "lucide-react";
+import { Map } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 import { Header } from "@/components/ui/header";
@@ -90,14 +90,6 @@ export default function Page() {
                     placeholder="Date"
                     className="flex-1 bg-[#272727] text-[#bdbdbd] px-4 py-4 rounded-lg border border-[#272727] focus:outline-none focus:border-[#6366f1] transition-colors placeholder:text-[#bdbdbd]"
                   />
-                  <input
-                    type="text"
-                    placeholder="Time"
-                    className="flex-1 bg-[#272727] text-[#bdbdbd] px-4 py-4 rounded-lg border border-[#272727] focus:outline-none focus:border-[#6366f1] transition-colors placeholder:text-[#bdbdbd]"
-                  />
-                  <button className="w-14 h-14 bg-[#272727] rounded-lg flex items-center justify-center hover:bg-[#1e1e1e] transition-colors">
-                    <Calendar className="w-5 h-5 text-[#ffffff]" />
-                  </button>
                 </div>
               </div>
 

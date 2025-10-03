@@ -51,7 +51,7 @@ export default function PersonalSettings() {
     },
     {
       title: "Windy",
-      label: "mph",
+      label: "E.g.",
       unit: "m/c",
       labelValue: windyValue,
       onValueChange: setWindyValue,
