@@ -35,30 +35,27 @@ export default function PersonalSettings() {
       <Header />
 
       <div className="flex">
-        <main className="flex-1 p-6">
+        <main className="flex-1 p-8">
           {/* Progress Stepper */}
           <div className="max-w-6xl mx-auto mb-16">
-            <div className="flex items-center justify-between relative">
-              {/* Line connecting steps */}
-              <div
-                className="absolute top-4 left-0 right-0 h-[1px] bg-[#272727]"
-                style={{ zIndex: 0 }}
-              />
-
+            <div className="flex items-center justify-between max-w-3xl">
               {/* Step 1 - Completed */}
-              <div className="flex items-center gap-3 relative z-10">
-                <div className="w-8 h-8 rounded-full bg-[#1976d2] flex items-center justify-center">
-                  <Check className="w-5 h-5" />
+              <div className="flex items-center gap-3">
+                <div className="w-6 h-6 rounded-full bg-[#6366f1] border-2 border-[#6366f1] flex items-center justify-center">
+                  <Check className="w-2 h-2" />
                 </div>
-                <span className="text-[#1976d2] font-medium">
-                  Basic Details
-                </span>
+                <span className="text-sm">Basic Details</span>
               </div>
 
-              {/* Step 2 - Current */}
-              <div className="flex items-center gap-3 relative z-10">
-                <div className="w-8 h-8 rounded-full border-2 border-[#1976d2] bg-[#000000] flex items-center justify-center" />
-                <span className="text-white font-medium">
+              {/* Connector Line 1 */}
+              <div className="flex-1 h-[1px] bg-[#272727] mx-4"></div>
+
+              {/* Step 2 - Active */}
+              <div className="flex items-center gap-3">
+                <div className="w-6 h-6 rounded-full bg-[#6366f1] border-2 border-[#6366f1] flex items-center justify-center">
+                  <div className="w-2 h-2 rounded-full bg-[#000000]"></div>
+                </div>
+                <span className="text-sm text-[#bdbdbd]">
                   Personal Settings
                 </span>
               </div>
@@ -66,7 +63,7 @@ export default function PersonalSettings() {
           </div>
 
           {/* Description */}
-          <div className="max-w-6xl mx-auto mb-8">
+          <div className="max-w-6xl mx-auto mb-12">
             <p className="text-white/90 italic text-lg leading-relaxed">
               Set your comfort limits. Choose when it feels Very Hot, Very Cold,
               Very Wet, or Very Windy for you — we’ll use these to calculate

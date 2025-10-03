@@ -15,7 +15,7 @@ export default function Page() {
 
       <div className="flex">
         <main className="flex-1 p-8">
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-6xl mx-auto">
             {/* Logo */}
 
             {/* Progress Stepper */}

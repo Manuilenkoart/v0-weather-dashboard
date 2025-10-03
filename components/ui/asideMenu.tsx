@@ -2,7 +2,7 @@ import { Menu, Grid, Bookmark, BookOpen, Home, HelpCircle } from "lucide-react";
 export default function Asidemenu() {
   return (
     <aside className="w-[84px] bg-[#151515] flex flex-col items-center py-8 gap-8 rounded-3xl">
-      <button className="w-14 h-14 rounded-full bg-[#272727] flex items-center justify-center hover:bg-[#1e1e1e] transition-colors">
+      <button className="w-14 h-14 rounded-full flex items-center justify-center hover:bg-[#1e1e1e] transition-colors">
         <Menu className="w-5 h-5 text-[#d8d8d8]" />
       </button>
 
