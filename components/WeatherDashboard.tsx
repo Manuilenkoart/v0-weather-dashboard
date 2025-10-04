@@ -152,7 +152,7 @@ export default function WeatherDashboard() {
   }, []);
 
   useEffect(() => {
-    fetch("https://weather-backend-1-w160.onrender.com/api/passport")
+    fetch("https://chronos-labs.vercel.app/api/passport")
       .then((d) => d.json())
       .then(setWeather)
       .catch((e) => console.error(e));
