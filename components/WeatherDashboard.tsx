@@ -214,7 +214,7 @@ export default function WeatherDashboard() {
                     </div>
                   </div>
 
-                  <div className="mt-8 flex items-center gap-2 text-[#1ad66f]">
+                  <div className="mt-8 flex items-center gap-2 text-[#FFC107]">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                       <path
                         d="M16 6L8 14L4 10"
@@ -225,7 +225,7 @@ export default function WeatherDashboard() {
                       />
                     </svg>
                     <span className="font-medium">
-                      Looks good, Enjoy your event
+                      It’s not the most comfortable day out there
                     </span>
                   </div>
                 </div>
