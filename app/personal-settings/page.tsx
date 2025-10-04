@@ -9,9 +9,9 @@ import { Header } from "@/components/ui/header";
 import SettingsCard from "@/components/ui/settingsCard";
 
 export default function PersonalSettings() {
-  const [hotValue, setHotValue] = useState([42.5]);
-  const [wetValue, setWetValue] = useState([0.55]);
-  const [coldValue, setColdValue] = useState([-35.0]);
+  const [hotValue, setHotValue] = useState([35]);
+  const [wetValue, setWetValue] = useState([0.6]);
+  const [coldValue, setColdValue] = useState([0]);
   const [windyValue, setWindyValue] = useState([10]);
   const router = useRouter();
 
@@ -35,8 +35,8 @@ export default function PersonalSettings() {
       onValueChange: setWetValue,
       icon: <Droplets className="w-6 h-6 text-[#757575]" />,
       min: 0.0,
-      max: 1.1,
-      step: 0.01,
+      max: 4.0,
+      step: 0.1,
     },
     {
       title: "Cold",
@@ -46,8 +46,8 @@ export default function PersonalSettings() {
       onValueChange: setColdValue,
       icon: <Thermometer className="w-6 h-6 text-[#757575]" />,
       min: -60,
-      max: -10,
-      step: 0.1,
+      max: 0,
+      step: 1,
     },
     {
       title: "Windy",
@@ -56,7 +56,7 @@ export default function PersonalSettings() {
       labelValue: windyValue,
       onValueChange: setWindyValue,
       icon: <Wind className="w-6 h-6 text-[#757575]" />,
-      min: 0.0,
+      min: 0,
       max: 60,
       step: 1,
     },

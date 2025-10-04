@@ -6,34 +6,62 @@ import Asidemenu from "./ui/asideMenu";
 import Image from "next/image";
 import DashboardCard from "./ui/dashboardCard";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+
+type WeatherKeys = "heat" | "very_wet" | "cold" | "windy";
+
+interface Weather {
+  event_history: Partial<Record<WeatherKeys, { probability_percent: number }>>;
+  live_forecast: Partial<Record<WeatherKeys, { flag: boolean; value: number }>>;
+}
 
 export default function WeatherDashboard() {
+  const router = useRouter();
+
+  const [weather, setWeather] = useState<Weather>({
+    event_history: {},
+    live_forecast: {},
+  });
+
   const conditions = [
     {
       name: "Very Hot",
       icon: (
         <Image
-          src={"/hot.svg"}
+          src={"/color/hot.svg"}
           width={50}
           height={50}
           alt={""}
           style={{ width: "50px", height: "50px", margin: "20px 0" }}
         />
       ),
-      data: "Risk: 20%",
+      data: `${weather.event_history?.heat?.probability_percent ?? ""}%`,
     },
     {
       name: "Very Wet",
       icon: (
         <Image
-          src={"/drops.svg"}
+          src={"/color/drops.svg"}
           width={50}
           height={50}
           alt={""}
           style={{ width: "50px", height: "50px", margin: "20px 0" }}
         />
       ),
-      data: "Risk: 40%",
+      data: `${weather.event_history?.very_wet?.probability_percent ?? ""}%`,
+    },
+    {
+      name: "Very Windy",
+      icon: (
+        <Image
+          src={"/color/windy.svg"}
+          width={50}
+          height={50}
+          alt={""}
+          style={{ width: "50px", height: "50px", margin: "20px 0" }}
+        />
+      ),
+      data: `${weather.event_history?.windy?.probability_percent ?? ""}%`,
     },
     {
       name: "Very Cold",
@@ -46,75 +74,63 @@ export default function WeatherDashboard() {
           style={{ width: "50px", height: "50px", margin: "20px 0" }}
         />
       ),
-      data: "Risk: 20%",
-    },
-    {
-      name: "Very Windy",
-      icon: (
-        <Image
-          src={"/windy.svg"}
-          width={50}
-          height={50}
-          alt={""}
-          style={{ width: "50px", height: "50px", margin: "20px 0" }}
-        />
-      ),
-      data: "Risk: 30%",
+      data: `${weather.event_history?.cold?.probability_percent ?? ""}%`,
     },
   ];
 
   const liveForecast = [
     {
-      name: "Very Hot",
+      name: "Temperature",
       icon: (
         <Image
-          src={"/hot.svg"}
+          src={"/color/hot.svg"}
           width={50}
           height={50}
           alt={""}
           style={{ width: "50px", height: "50px", margin: "20px 0" }}
         />
       ),
-      data: "+25°C",
+      data: `${weather.live_forecast?.heat?.value ?? ""} °C`,
     },
     {
-      name: "Very Wet",
+      name: "Wet",
       icon: (
         <Image
-          src={"/drops.svg"}
+          src={"/color/drops.svg"}
           width={50}
           height={50}
           alt={""}
           style={{ width: "50px", height: "50px", margin: "20px 0" }}
         />
       ),
-      data: "7.90 mm/day",
+      data: `${weather.live_forecast?.very_wet?.value ?? ""} mm/day`,
     },
+    // {
+    //   name: "Cold",
+    //   icon: (
+    //     <Image
+    //       src={"/cold.svg"}
+    //       width={50}
+    //       height={50}
+    //       alt={""}
+    //       style={{ width: "50px", height: "50px", margin: "20px 0" }}
+    //     />
+    //   ),
+
+    //   data: `${weather.live_forecast?.cold?.value ?? ""} °C`,
+    // },
     {
-      name: "Very Cold",
+      name: "Windy",
       icon: (
         <Image
-          src={"/cold.svg"}
+          src={"/color/windy.svg"}
           width={50}
           height={50}
           alt={""}
           style={{ width: "50px", height: "50px", margin: "20px 0" }}
         />
       ),
-      data: "-25°C",
-    },
-    {
-      name: "Very Windy",
-      icon: (
-        <Image
-          src={"/windy.svg"}
-          width={50}
-          height={50}
-          alt={""}
-          style={{ width: "50px", height: "50px", margin: "20px 0" }}
-        />
-      ),
-      data: "7.90 mm/s",
+      data: `${weather.live_forecast?.windy?.value ?? ""} mm/s`,
     },
   ];
   const [form, setForm] = useState({
@@ -138,9 +154,7 @@ export default function WeatherDashboard() {
   useEffect(() => {
     fetch("https://weather-backend-1-w160.onrender.com/api/passport")
       .then((d) => d.json())
-      .then((d) => {
-        console.log("d", d);
-      })
+      .then(setWeather)
       .catch((e) => console.error(e));
   }, []);
   return (
@@ -156,6 +170,19 @@ export default function WeatherDashboard() {
         <div className="flex-1 px-12 py-6">
           {/* Main Grid */}
           <div className="grid grid-cols-2 gap-6">
+            {/* Event Risk */}
+            <div className="bg-[#1e1e1e] rounded-3xl p-8">
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-xl font-semibold">Event Risk</h3>
+              </div>
+
+              <div className="grid grid-cols-4 gap-4">
+                {conditions.map((c) => (
+                  <DashboardCard key={c.name} {...c} />
+                ))}
+              </div>
+            </div>
+
             {/* Event Card */}
             <div className="bg-[#1e1e1e] rounded-3xl p-8">
               <div className="flex items-center justify-between mb-6">
@@ -164,7 +191,10 @@ export default function WeatherDashboard() {
                   <span>{form.date}</span>
                   {/* <span className="ml-4">3:00 PM</span> */}
                 </div>
-                <button className="text-[#979797] hover:text-[#ffffff]">
+                <button
+                  className="text-[#979797] hover:text-[#ffffff]"
+                  onClick={() => router.push("/event")}
+                >
                   <Settings className="w-5 h-5" />
                 </button>
               </div>
@@ -250,21 +280,6 @@ export default function WeatherDashboard() {
               </div>
             </div>
 
-            {/* Event History */}
-            <div className="bg-[#1e1e1e] rounded-3xl p-8">
-              <div className="flex items-center justify-between mb-6">
-                <h3 className="text-xl font-semibold">Event History</h3>
-              </div>
-
-              <div className="grid grid-cols-4 gap-4">
-                {conditions.map((c) => (
-                  <DashboardCard key={c.name} {...c} />
-                ))}
-              </div>
-            </div>
-
-            <div></div>
-
             {/* Live Forecast */}
             <div className="bg-[#1e1e1e] rounded-3xl p-8">
               <div className="flex items-center justify-between mb-6">
@@ -277,6 +292,8 @@ export default function WeatherDashboard() {
                 ))}
               </div>
             </div>
+
+            <div></div>
           </div>
         </div>
       </main>
