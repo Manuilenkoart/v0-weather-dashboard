@@ -252,7 +252,7 @@ export default function WeatherDashboard() {
                         stroke="url(#gradient)"
                         strokeWidth="12"
                         strokeDasharray="439.8"
-                        strokeDashoffset="175.92"
+                        strokeDashoffset="355.92"
                         strokeLinecap="round"
                       />
                       <defs>
@@ -269,7 +269,7 @@ export default function WeatherDashboard() {
                       </defs>
                     </svg>
                     <div className="absolute inset-0 flex flex-col items-center justify-center">
-                      <span className="text-5xl font-bold">60</span>
+                      <span className="text-5xl font-bold">20</span>
                       <span className="text-sm text-[#979797]">/100</span>
                     </div>
                   </div>

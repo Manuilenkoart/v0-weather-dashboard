@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 export default function Page() {
   const router = useRouter();
   const [form, setForm] = useState({
-    location: "52.2297, 21.0122",
+    location: "40.7869, -119.2066",
     event: "",
     date: "",
   });

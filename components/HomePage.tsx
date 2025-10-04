@@ -28,9 +28,7 @@ export default function Home() {
             </h1>
 
             <p className=" text-center text-lg max-w-2xl mb-8 leading-relaxed">
-              Get comprehensive weather risk analysis for your outdoor events.
-              Make informed decisions with real-time weather data, alternative
-              date suggestions, and detailed risk assessments.
+              Get comprehensive weather risk analysis for your outdoor events
             </p>
 
             <Link href={"/event"}>
