@@ -109,7 +109,7 @@ export default function WeatherDashboard() {
       name: "Wet",
       icon: (
         <Image
-          src={"/color/drops.svg"}
+          src={"/drops.svg"}
           width={50}
           height={50}
           alt={""}
