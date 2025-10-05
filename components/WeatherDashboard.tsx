@@ -1,6 +1,6 @@
 "use client";
 
-import { Calendar, Target, Settings, MapPin } from "lucide-react";
+import { Calendar, Target, Settings, MapPin, ChevronDown } from "lucide-react";
 import { Header } from "./ui/header";
 import Asidemenu from "./ui/asideMenu";
 import Image from "next/image";
@@ -169,19 +169,6 @@ export default function WeatherDashboard() {
         <div className="flex-1 pl-8">
           {/* Main Grid */}
           <div className="grid grid-cols-2 gap-6">
-            {/* Event Risk */}
-            <div className="bg-[#1e1e1e] rounded-3xl p-8">
-              <div className="flex items-center justify-between mb-6">
-                <h3 className="text-xl font-semibold">Event Risk</h3>
-              </div>
-
-              <div className="grid grid-cols-4 gap-4">
-                {conditions.map((c) => (
-                  <DashboardCard key={c.name} {...c} />
-                ))}
-              </div>
-            </div>
-
             {/* Event Card */}
             <div className="bg-[#1e1e1e] rounded-3xl p-8">
               <div className="flex items-center justify-between mb-6">
@@ -209,8 +196,7 @@ export default function WeatherDashboard() {
                     </div>
                     <div className="flex items-center gap-2">
                       <Target className="w-5 h-5" />
-                      <span>40.7869, -119.2066
-                      </span>
+                      <span>40.7869, -119.2066</span>
                     </div>
                   </div>
 
@@ -293,7 +279,147 @@ export default function WeatherDashboard() {
               </div>
             </div>
 
-            <div></div>
+            {/* Alternative Dates */}
+            <div className="bg-[#1e1e1e] rounded-3xl p-8">
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-xl font-semibold">Alternative dates</h3>
+              </div>
+
+              <div className="space-y-4">
+                {/* Date 1 */}
+                <div className="flex items-center justify-between">
+                  <div>
+                    <div className="text-2xl font-semibold">Sep, 28</div>
+                    <div className="text-sm text-[#979797]">2026</div>
+                  </div>
+
+                  <div className="relative w-18 h-18">
+                    <svg
+                      className="w-full h-full -rotate-90"
+                      viewBox="0 0 96 96"
+                    >
+                      <circle
+                        cx="48"
+                        cy="48"
+                        r="42"
+                        fill="none"
+                        stroke="#272727"
+                        strokeWidth="8"
+                      />
+                      <circle
+                        cx="48"
+                        cy="48"
+                        r="42"
+                        fill="none"
+                        stroke="url(#gradient2)"
+                        strokeWidth="8"
+                        strokeDasharray="263.89"
+                        strokeDashoffset="79.17"
+                        strokeLinecap="round"
+                      />
+                      <defs>
+                        <linearGradient
+                          id="gradient2"
+                          x1="0%"
+                          y1="0%"
+                          x2="100%"
+                          y2="100%"
+                        >
+                          <stop offset="0%" stopColor="#7c7cf5" />
+                          <stop offset="100%" stopColor="#9b7cf5" />
+                        </linearGradient>
+                      </defs>
+                    </svg>
+                    <div className="absolute inset-0 flex flex-col items-center justify-center">
+                      <span className="text-xl font-bold">70</span>
+                      <span className="text-xs text-[#979797]">/100</span>
+                    </div>
+                  </div>
+
+                  <div className="text-right">
+                    <div className="text-xs text-[#979797] mb-1">
+                      Comfort index
+                    </div>
+                    <div className="text-2xl font-semibold">
+                      70<span className="text-[#979797]">/100</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Date 2 */}
+                <div className="flex items-center justify-between">
+                  <div>
+                    <div className="text-2xl font-semibold">Sep, 29</div>
+                    <div className="text-sm text-[#979797]">2026</div>
+                  </div>
+
+                  <div className="relative w-18 h-18">
+                    <svg
+                      className="w-full h-full -rotate-90"
+                      viewBox="0 0 96 96"
+                    >
+                      <circle
+                        cx="48"
+                        cy="48"
+                        r="42"
+                        fill="none"
+                        stroke="#272727"
+                        strokeWidth="8"
+                      />
+                      <circle
+                        cx="48"
+                        cy="48"
+                        r="42"
+                        fill="none"
+                        stroke="url(#gradient3)"
+                        strokeWidth="8"
+                        strokeDasharray="263.89"
+                        strokeDashoffset="26.39"
+                        strokeLinecap="round"
+                      />
+                      <defs>
+                        <linearGradient
+                          id="gradient3"
+                          x1="0%"
+                          y1="0%"
+                          x2="100%"
+                          y2="100%"
+                        >
+                          <stop offset="0%" stopColor="#7c7cf5" />
+                          <stop offset="100%" stopColor="#9b7cf5" />
+                        </linearGradient>
+                      </defs>
+                    </svg>
+                    <div className="absolute inset-0 flex flex-col items-center justify-center">
+                      <span className="text-xl font-bold">90</span>
+                      <span className="text-xs text-[#979797]">/100</span>
+                    </div>
+                  </div>
+
+                  <div className="text-right">
+                    <div className="text-xs text-[#979797] mb-1">
+                      Comfort index
+                    </div>
+                    <div className="text-2xl font-semibold">
+                      90<span className="text-[#979797]">/100</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Event Risk */}
+            <div className="bg-[#1e1e1e] rounded-3xl p-8">
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-xl font-semibold">Event Risk</h3>
+              </div>
+
+              <div className="grid grid-cols-4 gap-4">
+                {conditions.map((c) => (
+                  <DashboardCard key={c.name} {...c} />
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </main>
