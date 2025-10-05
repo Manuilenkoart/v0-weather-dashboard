@@ -185,7 +185,7 @@ export default function WeatherDashboard() {
             {/* Event Card */}
             <div className="bg-[#1e1e1e] rounded-3xl p-8">
               <div className="flex items-center justify-between mb-6">
-                <div className="flex items-center gap-4 text-[#d8d8d8]">
+                <div className="flex items-center gap-2 text-[#d8d8d8]">
                   <Calendar className="w-5 h-5" />
                   <span>{form.date}</span>
                   {/* <span className="ml-4">3:00 PM</span> */}
