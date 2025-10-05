@@ -1,6 +1,6 @@
 "use client";
 
-import { Calendar, Target, Settings } from "lucide-react";
+import { Calendar, Target, Settings, MapPin } from "lucide-react";
 import { Header } from "./ui/header";
 import Asidemenu from "./ui/asideMenu";
 import Image from "next/image";
@@ -38,10 +38,23 @@ export default function WeatherDashboard() {
       data: `${weather.event_history?.heat?.probability_percent ?? ""}%`,
     },
     {
+      name: "Very Cold",
+      icon: (
+        <Image
+          src={"/cold.svg"}
+          width={50}
+          height={50}
+          alt={""}
+          style={{ width: "50px", height: "50px", margin: "20px 0" }}
+        />
+      ),
+      data: `${weather.event_history?.cold?.probability_percent ?? ""}%`,
+    },
+    {
       name: "Very Wet",
       icon: (
         <Image
-          src={"/color/drops.svg"}
+          src={"/drops.svg"}
           width={50}
           height={50}
           alt={""}
@@ -63,24 +76,11 @@ export default function WeatherDashboard() {
       ),
       data: `${weather.event_history?.windy?.probability_percent ?? ""}%`,
     },
-    {
-      name: "Very Cold",
-      icon: (
-        <Image
-          src={"/cold.svg"}
-          width={50}
-          height={50}
-          alt={""}
-          style={{ width: "50px", height: "50px", margin: "20px 0" }}
-        />
-      ),
-      data: `${weather.event_history?.cold?.probability_percent ?? ""}%`,
-    },
   ];
 
   const liveForecast = [
     {
-      name: "Temperature",
+      name: "Hot",
       icon: (
         <Image
           src={"/color/hot.svg"}
@@ -93,32 +93,31 @@ export default function WeatherDashboard() {
       data: `${weather.live_forecast?.heat?.value ?? ""} °C`,
     },
     {
-      name: "Wet",
+      name: "Cold",
       icon: (
         <Image
-          src={"/color/drops.svg"}
+          src={"/cold.svg"}
           width={50}
           height={50}
           alt={""}
           style={{ width: "50px", height: "50px", margin: "20px 0" }}
         />
       ),
-      data: `${weather.live_forecast?.very_wet?.value ?? ""} mm/day`,
+      data: `${weather.live_forecast?.cold?.value ?? ""} °C`,
     },
-    // {
-    //   name: "Cold",
-    //   icon: (
-    //     <Image
-    //       src={"/cold.svg"}
-    //       width={50}
-    //       height={50}
-    //       alt={""}
-    //       style={{ width: "50px", height: "50px", margin: "20px 0" }}
-    //     />
-    //   ),
-
-    //   data: `${weather.live_forecast?.cold?.value ?? ""} °C`,
-    // },
+    {
+      name: "Wet",
+      icon: (
+        <Image
+          src={"/drops.svg"}
+          width={50}
+          height={50}
+          alt={""}
+          style={{ width: "50px", height: "50px", margin: "20px 0" }}
+        />
+      ),
+      data: `${weather.live_forecast?.very_wet?.value ?? ""} mm/d`,
+    },
     {
       name: "Windy",
       icon: (
@@ -167,7 +166,7 @@ export default function WeatherDashboard() {
         <Asidemenu />
 
         {/* Content Area */}
-        <div className="flex-1 px-12 py-6">
+        <div className="flex-1 pl-8">
           {/* Main Grid */}
           <div className="grid grid-cols-2 gap-6">
             {/* Event Risk */}
@@ -201,16 +200,17 @@ export default function WeatherDashboard() {
 
               <div className="flex items-start justify-between">
                 <div className="flex-1">
-                  <h2 className="text-5xl font-bold mb-6">{form.event}</h2>
+                  <h2 className="text-3xl font-bold mb-6">{form.event}</h2>
 
                   <div className="space-y-2 text-[#d8d8d8]">
-                    {/* <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2">
                       <MapPin className="w-5 h-5" />
-                      <span>Warsaw, Poland</span>
-                    </div> */}
+                      <span>{form.location}</span>
+                    </div>
                     <div className="flex items-center gap-2">
                       <Target className="w-5 h-5" />
-                      <span>{form.location}</span>
+                      <span>40.7869, -119.2066
+                      </span>
                     </div>
                   </div>
 

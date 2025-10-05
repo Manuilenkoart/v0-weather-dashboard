@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 export default function Page() {
   const router = useRouter();
   const [form, setForm] = useState({
-    location: "40.7869, -119.2066",
+    location: "",
     event: "",
     date: "",
   });
@@ -76,6 +76,9 @@ export default function Page() {
                       type="text"
                       className="w-full bg-[#272727] text-[#bdbdbd] px-4 py-4 rounded-lg border border-[#272727] focus:outline-none focus:border-[#6366f1] transition-colors placeholder:text-[#bdbdbd]"
                       placeholder="Location"
+                      onChange={(e) =>
+                        setForm((prev) => ({ ...prev, location: e.target.value }))
+                      }
                     />
                   </div>
                   <button className="w-14 h-14 bg-[#272727] rounded-lg flex items-center justify-center hover:bg-[#1e1e1e] transition-colors">

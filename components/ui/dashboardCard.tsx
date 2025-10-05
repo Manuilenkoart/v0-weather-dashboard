@@ -8,7 +8,7 @@ type Props = {
 export default function DashboardCard({ icon, name, data }: Props) {
   return (
     <div className="bg-[#151515] rounded-2xl p-4 flex flex-col items-center">
-      <span className="text-xl text-[#ffffff] mb-4 font-medium">{name}</span>
+      <span className="text-[18px] text-[#ffffff] mb-4 font-medium">{name}</span>
       {icon}
       <span className="text-lg text-[#ffffff] font-medium">{data}</span>
     </div>
