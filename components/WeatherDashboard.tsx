@@ -54,7 +54,7 @@ export default function WeatherDashboard() {
       name: "Very Wet",
       icon: (
         <Image
-          src={"/drops.svg"}
+          src={"/color/drops.svg"}
           width={50}
           height={50}
           alt={""}
@@ -109,7 +109,7 @@ export default function WeatherDashboard() {
       name: "Wet",
       icon: (
         <Image
-          src={"/drops.svg"}
+          src={"/color/drops.svg"}
           width={50}
           height={50}
           alt={""}
